@@ -1,18 +1,15 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div className='flex flex-col min-h-screen items-center justify-center'>
-      <h1 className='text-4xl'>Hello World!</h1>
-      <Button
-        onClick={() => {
-          alert('You clicked it!');
-        }}
-      >
-        Click me!
-      </Button>
+    <div className='flex min-h-screen items-center justify-center'>
+      Click
+      <Link href='/documents/123'>
+        <span className='italic'>&nbsp;here&nbsp;</span>
+      </Link>
+      to go to document id page!
     </div>
   );
 }
