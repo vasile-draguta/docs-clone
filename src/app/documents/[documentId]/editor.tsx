@@ -6,6 +6,7 @@ import { TaskItem, TaskList } from '@tiptap/extension-list';
 import { TableKit } from '@tiptap/extension-table';
 import ImageResize from 'tiptap-extension-resize-image';
 import { useEditorStore } from '@/store/use-editor-store';
+import { FontFamily, TextStyle } from '@tiptap/extension-text-style';
 
 export function Editor() {
   const { setEditor } = useEditorStore();
@@ -50,6 +51,8 @@ export function Editor() {
         table: { resizable: true },
       }),
       ImageResize,
+      FontFamily,
+      TextStyle,
     ],
     content: `
         <table>
