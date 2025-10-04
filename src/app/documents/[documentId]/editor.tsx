@@ -46,7 +46,13 @@ export function Editor() {
       },
     },
     extensions: [
-      StarterKit,
+      StarterKit.configure({
+        link: {
+          openOnClick: false,
+          autolink: true,
+          defaultProtocol: 'https',
+        },
+      }),
       TaskItem.configure({ nested: true }),
       TaskList,
       TableKit.configure({
