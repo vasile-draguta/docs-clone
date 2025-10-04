@@ -9,6 +9,7 @@ import { useEditorStore } from '@/store/use-editor-store';
 import { FontFamily, TextStyle } from '@tiptap/extension-text-style';
 import { Color } from '@tiptap/extension-text-style';
 import { Highlight } from '@tiptap/extension-highlight';
+import { TextAlign } from '@tiptap/extension-text-align';
 
 export function Editor() {
   const { setEditor } = useEditorStore();
@@ -63,6 +64,7 @@ export function Editor() {
       TextStyle,
       Color,
       Highlight.configure({ multicolor: true }),
+      TextAlign.configure({ types: ['heading', 'paragraph'] }),
     ],
     content: `
         <table>
