@@ -31,6 +31,7 @@ import {
   ImageIcon,
   ItalicIcon,
   Link2Icon,
+  ListCollapseIcon,
   ListIcon,
   ListOrderedIcon,
   ListTodoIcon,
@@ -50,7 +51,46 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
-function FontSizeButton() {
+function LineHeightButton() {
+  const { editor } = useEditorStore();
+
+  const lineHeights = [
+    { label: 'Tight', value: '1.1' },
+    { label: 'Normal', value: '1.5' },
+    { label: 'Relaxed', value: '1.75' },
+    { label: 'Double', value: '2' },
+  ];
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button
+          className='h7 w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm'
+          title='Line Height'
+        >
+          <ListCollapseIcon className='size-4' />
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        {lineHeights.map(({ label, value }) => (
+          <button
+            key={value}
+            onClick={() => editor?.chain().focus().setLineHeight(value).run()}
+            className={cn(
+              'flex items-center w-full gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80',
+              editor?.getAttributes('textStyle').lineHeight === value &&
+                'bg-neutral-200/80'
+            )}
+          >
+            <span className='text-sm'>{label}</span>
+          </button>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
+function FontSizeMenu() {
   const { editor } = useEditorStore();
 
   const currentFontSize = editor?.getAttributes('textStyle').fontSize
@@ -112,6 +152,7 @@ function FontSizeButton() {
       <button
         className='h7 w-7 shrink-0 flex items-center justify-center rounded-sm hover:bg-neutral-200/80'
         onClick={decrement}
+        title='Decrease Font Size'
       >
         <MinusIcon className='size-4' />
       </button>
@@ -141,6 +182,7 @@ function FontSizeButton() {
       <button
         className='h7 w-7 shrink-0 flex items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5'
         onClick={increment}
+        title='Increase Font Size'
       >
         <PlusIcon className='size-4' />
       </button>
@@ -169,7 +211,10 @@ function ListButton() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className='h7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm'>
+        <button
+          className='h7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm'
+          title='Create List'
+        >
           <ListIcon className='size-4' />
         </button>
       </DropdownMenuTrigger>
@@ -221,7 +266,10 @@ function TextAlignButton() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className='h7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm'>
+        <button
+          className='h7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm'
+          title='Text Alignment'
+        >
           <AlignLeftIcon className='size-4' />
         </button>
       </DropdownMenuTrigger>
@@ -280,7 +328,10 @@ function ImageButton() {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <button className='h7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm'>
+          <button
+            className='h7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm'
+            title='Add Image'
+          >
             <ImageIcon className='size-4' />
           </button>
         </DropdownMenuTrigger>
@@ -340,7 +391,10 @@ function LinkButton() {
       }}
     >
       <DropdownMenuTrigger asChild>
-        <button className='h7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm'>
+        <button
+          className='h7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm'
+          title='Add Link'
+        >
           <Link2Icon className='size-4' />
         </button>
       </DropdownMenuTrigger>
@@ -381,7 +435,10 @@ function HighlightColorButton() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className='h7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm'>
+        <button
+          className='h7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm'
+          title='Highlight Text'
+        >
           <HighlighterIcon className='size-4' />
         </button>
       </DropdownMenuTrigger>
@@ -404,7 +461,10 @@ function TextColorButton() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className='h7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm'>
+        <button
+          className='h7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm'
+          title='Color Text'
+        >
           <span className='text-xs'>A</span>
           <div className='h-0.5 w-full' style={{ backgroundColor: value }} />
         </button>
@@ -440,7 +500,10 @@ function HeadingLevelButton() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className='h7 min-w-7 shrink-0 flex items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm'>
+        <button
+          className='h7 min-w-7 shrink-0 flex items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm'
+          title='Headings'
+        >
           <span className='truncate'>{getCurrentHeading()}</span>
           <ChevronDownIcon className='ml-2 size-4 shrink-0' />
         </button>
@@ -490,7 +553,10 @@ function FontFamilyButton() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className='h7 w-[120px] shrink-0 flex items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm'>
+        <button
+          className='h7 w-[120px] shrink-0 flex items-center justify-between rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm'
+          title='Font Family'
+        >
           <span className='truncate'>
             {editor?.getAttributes('textStyle').fontFamily || 'Arial'}
           </span>
@@ -523,12 +589,19 @@ interface ToolbarButtonProps {
   onClick?: () => void;
   isActive?: boolean;
   icon: LucideIcon;
+  label: string;
 }
 
-function ToolbarButton({ onClick, isActive, icon: Icon }: ToolbarButtonProps) {
+function ToolbarButton({
+  onClick,
+  isActive,
+  icon: Icon,
+  label,
+}: ToolbarButtonProps) {
   return (
     <button
       onClick={onClick}
+      title={label}
       className={cn(
         'text-sm h-7 min-w-7 flex items-center justify-center rounded-sm hover:bg-neutral-200/80',
         isActive && 'bg-neutral-200/80'
@@ -643,9 +716,9 @@ export function Toolbar() {
       <Separator className='!h-6 bg-neutral-300' orientation='vertical' />
       <FontFamilyButton />
       <Separator className='!h-6 bg-neutral-300' orientation='vertical' />
-      <FontSizeButton />
-      <Separator className='!h-6 bg-neutral-300' orientation='vertical' />
       <HeadingLevelButton />
+      <Separator className='!h-6 bg-neutral-300' orientation='vertical' />
+      <FontSizeMenu />
       <Separator className='!h-6 bg-neutral-300' orientation='vertical' />
 
       {sections[1].map((item) => (
@@ -659,6 +732,7 @@ export function Toolbar() {
       <ImageButton />
       <TextAlignButton />
       <ListButton />
+      <LineHeightButton />
 
       {sections[2].map((item) => (
         <ToolbarButton key={item.label} {...item} />

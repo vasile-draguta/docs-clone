@@ -281,6 +281,8 @@
       outline: 3px solid var(--primary);
     }
   }
+  line-height: 1.1;
+
 
   /* Link styles */
   a {
