@@ -17,6 +17,7 @@ export function SearchInput() {
 
   const handleClear = () => {
     setValue('');
+    setSearch('');
     inputRef.current?.blur();
   };
 
