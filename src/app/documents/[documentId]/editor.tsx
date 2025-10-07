@@ -77,13 +77,7 @@ export function Editor() {
       }),
       LineHeight,
     ],
-    content: `
-        <p>Adjusting line heights can greatly affect the readability of your text, making it easier for users to engage with your content.</p>
-        <p>Line height is the vertical distance between lines of text in a paragraph. It's also known as leading, which comes from the days of metal type, when strips of lead were placed between lines of type to add space.</p>
-        <p>Line height is expressed as a ratio, meaning the default line height is 1.0. A line height of 1.5 would be 1.5 times the height of the font, while a line height of 2.0 would be twice the height of the font.</p>
-        <p>It's important to choose a line height that's appropriate for your font size and line length. A line height that's too small can make text feel cramped, while a line height that's too large can make text feel disconnected.</p>
-
-      `,
+    content: ``,
   });
   return (
     <div className='size-full overflow-x-auto bg-[#f9fbfd] px-4 print:p-0 print:bg-white print:overflow-visible'>
