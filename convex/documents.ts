@@ -28,3 +28,45 @@ export const create = mutation({
     });
   },
 });
+
+export const removeById = mutation({
+  args: { id: v.id('documents') },
+  handler: async (ctx, args) => {
+    const user = await ctx.auth.getUserIdentity();
+
+    if (!user) {
+      throw new ConvexError('Unauthorised');
+    }
+
+    const document = await ctx.db.get(args.id);
+
+    const isOwner = document?.ownerId === user.subject;
+
+    if (!isOwner) {
+      throw new ConvexError('Unauthorised');
+    }
+
+    return await ctx.db.delete(args.id);
+  },
+});
+
+export const updateById = mutation({
+  args: { id: v.id('documents'), title: v.string() },
+  handler: async (ctx, args) => {
+    const user = await ctx.auth.getUserIdentity();
+
+    if (!user) {
+      throw new ConvexError('Unauthorised');
+    }
+
+    const document = await ctx.db.get(args.id);
+
+    const isOwner = document?.ownerId === user.subject;
+
+    if (!isOwner) {
+      throw new ConvexError('Unauthorised');
+    }
+
+    return await ctx.db.patch(args.id, { title: args.title });
+  },
+});
