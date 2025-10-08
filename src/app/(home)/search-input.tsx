@@ -24,7 +24,6 @@ export function SearchInput() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSearch(value);
-    setValue('');
     inputRef.current?.blur();
   };
 
