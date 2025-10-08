@@ -14,6 +14,30 @@ export const get = query({
       throw new ConvexError('Unauthorised');
     }
 
+    console.log(user);
+
+    const organizationId = (user.organization_id ?? undefined) as
+      | string
+      | undefined;
+
+    if (search && organizationId) {
+      return await ctx.db
+        .query('documents')
+        .withSearchIndex('search_title', (q) =>
+          q.search('title', search).eq('organizationId', organizationId)
+        )
+        .paginate(paginationOpts);
+    }
+
+    if (organizationId) {
+      return await ctx.db
+        .query('documents')
+        .withIndex('by_organization_id', (q) =>
+          q.eq('organizationId', organizationId)
+        )
+        .paginate(paginationOpts);
+    }
+
     if (search) {
       return await ctx.db
         .query('documents')
@@ -41,9 +65,14 @@ export const create = mutation({
       throw new ConvexError('Unauthorised');
     }
 
+    const organizationId = (user.organization_id ?? undefined) as
+      | string
+      | undefined;
+
     return await ctx.db.insert('documents', {
       title: args.title ?? 'Untitled document',
       ownerId: user.subject,
+      organizationId: organizationId,
       initialContent: args.initialContent,
     });
   },
@@ -58,11 +87,25 @@ export const removeById = mutation({
       throw new ConvexError('Unauthorised');
     }
 
+    const organizationId = (user.organization_id ?? undefined) as
+      | string
+      | undefined;
+
+    const organizationRole = (user.organization_role ?? undefined) as
+      | string
+      | undefined;
+
     const document = await ctx.db.get(args.id);
 
     const isOwner = document?.ownerId === user.subject;
 
-    if (!isOwner) {
+    const isAdmin = organizationRole === 'org:admin';
+
+    if (!isOwner && !organizationId) {
+      throw new ConvexError('Unauthorised');
+    }
+
+    if (!isAdmin && organizationId) {
       throw new ConvexError('Unauthorised');
     }
 
@@ -84,7 +127,7 @@ export const updateById = mutation({
     const isOwner = document?.ownerId === user.subject;
 
     if (!isOwner) {
-      throw new ConvexError('Unauthorised');
+      throw new ConvexError('Unauthorized');
     }
 
     return await ctx.db.patch(args.id, { title: args.title });
