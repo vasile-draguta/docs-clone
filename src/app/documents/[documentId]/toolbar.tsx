@@ -65,7 +65,7 @@ function LineHeightButton() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button
-          className='h7 w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm'
+          className='h7 w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 py-1.5 overflow-hidden text-sm'
           title='Line Height'
         >
           <ListCollapseIcon className='size-4' />
@@ -110,8 +110,11 @@ function FontSizeMenu() {
   }, [isEditing]);
 
   const updateFontSize = (newSize: string) => {
-    const size = Number(newSize);
+    let size = Number(newSize);
     if (!isNaN(size) && size > 0) {
+      if (size > 400) {
+        size = 400;
+      }
       editor?.chain().focus().setFontSize(`${size}px`).run();
       setFontSize(newSize);
       setInputValue(newSize);
@@ -212,7 +215,7 @@ function ListButton() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button
-          className='h7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm'
+          className='h7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 py-1.5 overflow-hidden text-sm'
           title='Create List'
         >
           <ListIcon className='size-4' />
@@ -267,7 +270,7 @@ function TextAlignButton() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button
-          className='h7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm'
+          className='h7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 py-1.5 overflow-hidden text-sm'
           title='Text Alignment'
         >
           <AlignLeftIcon className='size-4' />
@@ -329,7 +332,7 @@ function ImageButton() {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <button
-            className='h7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm'
+            className='h7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 py-1.5 overflow-hidden text-sm'
             title='Add Image'
           >
             <ImageIcon className='size-4' />
@@ -392,7 +395,7 @@ function LinkButton() {
     >
       <DropdownMenuTrigger asChild>
         <button
-          className='h7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm'
+          className='h7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 py-1.5 overflow-hidden text-sm'
           title='Add Link'
         >
           <Link2Icon className='size-4' />
@@ -436,7 +439,7 @@ function HighlightColorButton() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button
-          className='h7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm'
+          className='h7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 py-1.5 overflow-hidden text-sm'
           title='Highlight Text'
         >
           <HighlighterIcon className='size-4' />
@@ -462,7 +465,7 @@ function TextColorButton() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button
-          className='h7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm'
+          className='h7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 py-1.5 overflow-hidden text-sm'
           title='Color Text'
         >
           <span className='text-xs'>A</span>
@@ -501,7 +504,7 @@ function HeadingLevelButton() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button
-          className='h7 min-w-7 shrink-0 flex items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm'
+          className='h7 min-w-7 shrink-0 flex items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 py-1 overflow-hidden text-sm'
           title='Headings'
         >
           <span className='truncate'>{getCurrentHeading()}</span>
@@ -554,7 +557,7 @@ function FontFamilyButton() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button
-          className='h7 w-[120px] shrink-0 flex items-center justify-between rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm'
+          className='h7 w-[120px] shrink-0 flex items-center justify-between rounded-sm hover:bg-neutral-200/80 px-1.5 py-1 overflow-hidden text-sm'
           title='Font Family'
         >
           <span className='truncate'>
@@ -709,7 +712,7 @@ export function Toolbar() {
   ];
 
   return (
-    <div className='bg-[#f1f4f9] px-2.5 py-0.5 rounded-[24px] min-h-[40px] flex items-center gap-x-0.5 overflow-x-auto'>
+    <div className='bg-[#f1f4f9] px-2.5 py-0.5 rounded-[24px] min-h-[40px] flex items-center gap-x-0.5 overflow-x-auto dark:bg-[#121212]'>
       {sections[0].map((item) => (
         <ToolbarButton key={item.label} {...item} />
       ))}

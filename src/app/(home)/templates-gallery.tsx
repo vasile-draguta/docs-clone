@@ -15,11 +15,13 @@ import { useMutation } from 'convex/react';
 import { api } from '../../../convex/_generated/api';
 import { useState } from 'react';
 import { toast } from 'sonner';
+import { useTheme } from 'next-themes';
 
 export function TemplatesGallery() {
   const router = useRouter();
   const create = useMutation(api.documents.create);
   const [isCreating, setIsCreating] = useState(false);
+  const { resolvedTheme } = useTheme();
 
   const onTemplateClick = (title: string, initialContent: string) => {
     setIsCreating(true);
@@ -35,7 +37,7 @@ export function TemplatesGallery() {
   };
 
   return (
-    <div className='bg-[#F1F3F4]'>
+    <div className='bg-[#F1F3F4] dark:bg-[#121212]'>
       <div className='max-w-screen-xl mx-auto px-16 py-6 flex flex-col gap-y-2'>
         <h3 className='text-base font-medium'>Start New Document</h3>
         <Carousel>
@@ -59,6 +61,10 @@ export function TemplatesGallery() {
                       backgroundSize: 'cover',
                       backgroundPosition: 'center',
                       backgroundRepeat: 'no-repeat',
+                      filter:
+                        resolvedTheme === 'dark'
+                          ? 'invert(80%) hue-rotate(180deg) '
+                          : '',
                     }}
                     className='size-full hover:border-blue-500 rounded-sm border hover:bg-blue-50 transition flex flex-col items-center justify-center gap-y-4 bg-white'
                   />

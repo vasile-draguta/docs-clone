@@ -37,6 +37,7 @@ import {
 import { BsFilePdf } from 'react-icons/bs';
 import { useEditorStore } from '@/store/use-editor-store';
 import { OrganizationSwitcher, UserButton } from '@clerk/nextjs';
+import { ThemeSelector } from '@/components/theme-selector';
 
 export function Navbar() {
   const { editor } = useEditorStore();
@@ -88,10 +89,16 @@ export function Navbar() {
   };
 
   return (
-    <nav className='flex items-center justify-between'>
+    <nav className='flex items-center justify-between dark:bg-black'>
       <div className='flex gap-2 items-center'>
         <Link href='/'>
-          <Image src='/logo.svg' alt='Logo' height={36} width={36} />
+          <Image
+            src='/logo.svg'
+            alt='Logo'
+            height={36}
+            width={36}
+            className='dark:invert'
+          />
         </Link>
 
         <div className='flex flex-col'>
@@ -270,6 +277,7 @@ export function Navbar() {
           afterSelectPersonalUrl='/'
         />
         <UserButton />
+        <ThemeSelector />
       </div>
     </nav>
   );

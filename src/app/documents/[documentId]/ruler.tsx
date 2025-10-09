@@ -66,7 +66,7 @@ export function Ruler() {
 
   return (
     <div
-      className='w-[816px] mx-auto h-6 border-b border-gray-300 flex items-end sticky top-0 z-20 bg-[#f9fbfd] select-none print:hidden'
+      className='w-[816px] mx-auto h-6 border-b border-gray-300 flex items-end sticky top-0 z-20 bg-[#f9fbfd] select-none print:hidden dark:bg-black'
       ref={rulerRef}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}

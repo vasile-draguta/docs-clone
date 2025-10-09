@@ -10,6 +10,7 @@ import {
   useOrganization,
 } from '@clerk/nextjs';
 import { useEffect } from 'react';
+import { ThemeSelector } from '@/components/theme-selector';
 
 export function Navbar() {
   const { getToken } = useAuth();
@@ -22,10 +23,16 @@ export function Navbar() {
   }, [organization, getToken]);
 
   return (
-    <nav className='flex items-center justify-between h-full w-full'>
+    <nav className='flex items-center justify-between h-full w-full dark:bg-black'>
       <div className='flex gap-3 items-center shrink-0 pr-6'>
         <Link href='/'>
-          <Image src='/logo.svg' alt='logo' width={36} height={36} />
+          <Image
+            src='/logo.svg'
+            alt='logo'
+            width={36}
+            height={36}
+            className='dark:invert'
+          />
         </Link>
         <h3 className='text-xl'>Docs</h3>
       </div>
@@ -38,6 +45,7 @@ export function Navbar() {
           afterSelectPersonalUrl='/'
         />
         <UserButton />
+        <ThemeSelector />
       </div>
     </nav>
   );
