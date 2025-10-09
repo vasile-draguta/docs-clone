@@ -51,6 +51,17 @@ export const get = query({
   },
 });
 
+export const getById = query({
+  args: {
+    documentId: v.id('documents'),
+  },
+  handler: async (ctx, { documentId }) => {
+    const document = await ctx.db.get(documentId);
+
+    return document;
+  },
+});
+
 export const create = mutation({
   args: {
     title: v.optional(v.string()),
