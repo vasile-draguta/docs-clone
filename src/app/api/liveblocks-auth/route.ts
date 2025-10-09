@@ -1,6 +1,6 @@
 import { Liveblocks } from '@liveblocks/node';
 import { ConvexHttpClient } from 'convex/browser';
-import { auth, currentUser } from '@clerk/nextjs/server';
+import { auth, currentUser, clerkClient } from '@clerk/nextjs/server';
 import { api } from '../../../../convex/_generated/api';
 
 const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
@@ -30,9 +30,22 @@ export async function POST(req: Request) {
   }
 
   const isOwner = document.ownerId == user.id;
-  const isOrgMember = !!(
-    document.organizationId && document.organizationId === sessionClaims.org_id
-  );
+
+  let isOrgMember = false;
+
+  if (document.organizationId) {
+    try {
+      const client = await clerkClient();
+      const orgMembershipList =
+        await client.users.getOrganizationMembershipList({
+          userId: user.id,
+        });
+
+      isOrgMember = orgMembershipList.data.some(
+        (membership) => membership.organization.id === document.organizationId
+      );
+    } catch {}
+  }
 
   if (!isOwner && !isOrgMember) {
     return new Response('Unauthorised', { status: 401 });
@@ -40,7 +53,8 @@ export async function POST(req: Request) {
 
   const session = liveblocks.prepareSession(user.id, {
     userInfo: {
-      name: user.fullName ?? 'Anonymous',
+      name:
+        user.fullName ?? user.primaryEmailAddress?.emailAddress ?? 'Anonymous',
       avatar: user.imageUrl,
     },
   });

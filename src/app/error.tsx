@@ -15,12 +15,12 @@ export default function ErrorPage({
     <div className='min-h-screen flex flex-col items-center justify-center space-y-6'>
       <div className='text-center space-y-4'>
         <div className='flex justify-center'>
-          <div className='bg-rose-100 p-3 rounded-full'>
-            <AlertTriangleIcon className='bg-rose-600 size-10' />
+          <div className='bg-red-600 p-3 rounded-full dark:bg-red-600'>
+            <AlertTriangleIcon className='bg-red-600 text-white size-10 dark:bg-red-600' />
           </div>
         </div>
         <div className='space-y-2'>
-          <h2 className='text-xl font-semibold text-gray-900'>
+          <h2 className='text-xl font-semibold dark:text-white'>
             Something went wrong
           </h2>
           <p>{error.message}</p>
