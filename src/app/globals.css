@@ -294,3 +294,47 @@
     }
   }
 }
+
+  /* Position controller box */
+  .dark .ProseMirror div[style*="z-index: 999"][style*="position: absolute"] {
+    background-color: black !important;
+    border-color: #a8a8a8 !important;
+    
+  }
+  /* Corner dots */
+  .dark .ProseMirror div[style*="border-radius: 50%"][style*="position: absolute"] {
+    border-color: #a8a8a8 !important;
+  }
+  /* Force dashed selection border color on container */
+  .dark .ProseMirror div[style*="border: 1px dashed"] {
+    border: 1px dashed #a8a8a8 !important;
+  }
+  /* Invert controller icon glyphs (align left/center/right) in dark mode */
+  .dark .ProseMirror div[style*="z-index: 999"][style*="position: absolute"] img[style*="width: 24px"][style*="height: 24px"] {
+    filter: invert(1) brightness(1.3) contrast(1.1);
+  }
+
+
+  /* For mobile */
+.floating-threads {
+  display: none;
+}
+
+/* For desktop */
+.anchored-threads {
+  display: block;
+  max-width: 300px;
+  width: 100%;
+  position: absolute;
+  right: 12px;
+}
+
+@media (max-width: 640px) {
+  .floating-threads {
+    display: block;
+  }
+
+  .anchored-threads {
+    display: none;
+  }
+}
