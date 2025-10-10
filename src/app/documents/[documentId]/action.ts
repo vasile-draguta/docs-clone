@@ -36,3 +36,7 @@ export async function getUsers(documentId: string) {
 
   return users;
 }
+
+export async function getDocuments(ids: Id<'documents'>[]) {
+  return await convex.query(api.documents.getByIds, { ids });
+}
