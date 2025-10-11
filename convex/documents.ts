@@ -58,6 +58,10 @@ export const getById = query({
   handler: async (ctx, { documentId }) => {
     const document = await ctx.db.get(documentId);
 
+    if (!document) {
+      throw new ConvexError('Document not found');
+    }
+
     return document;
   },
 });

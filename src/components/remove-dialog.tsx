@@ -13,11 +13,10 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
-import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { api } from '../../convex/_generated/api';
 import { useState } from 'react';
 import { toast } from 'sonner';
-import { ConvexError } from 'convex/values';
+import { useRouter } from 'next/navigation';
 
 interface RemoveDialogProps {
   documentId: Id<'documents'>;
@@ -25,6 +24,7 @@ interface RemoveDialogProps {
 }
 
 export function RemoveDialog({ documentId, children }: RemoveDialogProps) {
+  const router = useRouter();
   const remove = useMutation(api.documents.removeById);
   const [isRemoving, setIsRemoving] = useState(false);
 
@@ -49,7 +49,10 @@ export function RemoveDialog({ documentId, children }: RemoveDialogProps) {
               e.stopPropagation();
               setIsRemoving(true);
               remove({ id: documentId })
-                .then(() => toast.success('Document deleted successfuly!'))
+                .then(() => {
+                  toast.success('Document deleted successfuly!');
+                  router.push('/');
+                })
                 .catch(() => toast.error('No access to delete this document.'))
                 .finally(() => setIsRemoving(false));
             }}
