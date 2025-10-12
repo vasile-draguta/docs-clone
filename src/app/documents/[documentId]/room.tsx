@@ -52,9 +52,17 @@ export function Room({ children }: { children: ReactNode }) {
       }}
       throttle={16}
       resolveUsers={({ userIds }) => {
-        return userIds.map(
-          (userId) => users.find((user) => user.id === userId) ?? undefined
-        );
+        return userIds.map((userId) => {
+          const user = users.find((user) => user.id === userId);
+          if (user) {
+            return {
+              name: user.name,
+              avatar: user.avatar,
+              color: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
+            };
+          }
+          return undefined;
+        });
       }}
       resolveMentionSuggestions={({ text }) => {
         let filteredUsers = users;
