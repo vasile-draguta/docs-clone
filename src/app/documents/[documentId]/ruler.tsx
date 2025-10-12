@@ -10,12 +10,13 @@ const RULER_STEPS = 83;
 const markers = Array.from({ length: RULER_STEPS }, (_, i) => i);
 
 export function Ruler() {
-  const leftMargin = useStorage((root) => root.leftMargin) ?? 56;
+  const leftMargin = useStorage((root) => root.leftMargin) ?? STARTING_PADDING;
   const setLeftMargin = useMutation(({ storage }, newPosition) => {
     storage.set('leftMargin', newPosition);
   }, []);
 
-  const rightMargin = useStorage((root) => root.rightMargin) ?? 56;
+  const rightMargin =
+    useStorage((root) => root.rightMargin) ?? STARTING_PADDING;
   const setRightMargin = useMutation(({ storage }, newPosition) => {
     storage.set('rightMargin', newPosition);
   }, []);

@@ -20,6 +20,8 @@ import { Ruler } from './ruler';
 import { Threads } from './threads';
 import { useStorage } from '@liveblocks/react';
 
+const INITIAL_MARGIN = 56;
+
 interface EditorProps {
   initialConent: string | undefined;
 }
@@ -61,7 +63,7 @@ export function Editor({ initialConent }: EditorProps) {
     },
     editorProps: {
       attributes: {
-        style: `padding-left: ${leftMargin ?? 56}px; padding-right: ${rightMargin ?? 56}px`,
+        style: `padding-left: ${leftMargin ?? INITIAL_MARGIN}px; padding-right: ${rightMargin ?? INITIAL_MARGIN}px`,
         class:
           'focus-outline-none print:border-0 print:bg-white border border-[#c7c7c7] flex flex-col min-h-[1054px] w-[816px] pt-10 pr-14 pb-10 cursor-text',
       },
