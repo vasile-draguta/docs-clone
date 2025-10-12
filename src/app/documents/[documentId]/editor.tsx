@@ -20,9 +20,13 @@ import { Ruler } from './ruler';
 import { Threads } from './threads';
 import { useStorage } from '@liveblocks/react';
 
-export function Editor() {
+interface EditorProps {
+  initialConent: string | undefined;
+}
+
+export function Editor({ initialConent }: EditorProps) {
   const { setEditor } = useEditorStore();
-  const liveblocks = useLiveblocksExtension();
+  const liveblocks = useLiveblocksExtension({ initialContent: initialConent });
   const leftMargin = useStorage((root) => root.leftMargin);
   const rightMargin = useStorage((root) => root.rightMargin);
 
@@ -85,7 +89,6 @@ export function Editor() {
       LineHeight,
       liveblocks,
     ],
-    content: ``,
   });
   return (
     <div className='size-full overflow-x-auto bg-[#f9fbfd] px-4 print:p-0 print:bg-white print:overflow-visible dark:bg-black'>

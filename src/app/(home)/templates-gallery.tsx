@@ -55,7 +55,9 @@ export function TemplatesGallery() {
                 >
                   <button
                     disabled={isCreating}
-                    onClick={() => onTemplateClick(template.label, '')}
+                    onClick={() =>
+                      onTemplateClick(template.label, template.inititalContent)
+                    }
                     style={{
                       backgroundImage: `url(${template.imageUrl})`,
                       backgroundSize: 'cover',

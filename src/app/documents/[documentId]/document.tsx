@@ -22,7 +22,7 @@ export function Document({ preloadedDocument }: DocumentProps) {
           <Toolbar />
         </div>
         <div className='pt-[114px] print:pt-0 dark:bg-black'>
-          <Editor />
+          <Editor initialConent={document.initialContent} />
         </div>
       </div>
     </Room>
