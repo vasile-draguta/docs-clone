@@ -115,7 +115,14 @@ function FontSizeMenu() {
       if (size > 400) {
         size = 400;
       }
-      editor?.chain().focus().setFontSize(`${size}px`).run();
+
+      const isHeading = editor?.isActive('heading');
+      if (isHeading) {
+        editor?.chain().focus().unsetFontSize().setFontSize(`${size}px`).run();
+      } else {
+        editor?.chain().focus().setFontSize(`${size}px`).run();
+      }
+
       setFontSize(newSize);
       setInputValue(newSize);
       setIsEditing(false);
@@ -529,6 +536,7 @@ function HeadingLevelButton() {
                 editor
                   ?.chain()
                   .focus()
+                  .unsetFontSize() // Clear any existing font size when switching to heading
                   .toggleHeading({ level: value as Level })
                   .run();
               }
