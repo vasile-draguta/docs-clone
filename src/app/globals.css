@@ -342,3 +342,17 @@
 div[data-radix-popper-content-wrapper] {
   z-index: 50 !important;
 }
+
+/* Liveblocks CSS Variables for Dark Mode Only */
+.dark .lb-root {
+  --lb-accent: #3b82f6;
+  --lb-spacing: 0.5rem;
+  --lb-radius: 0.5rem;
+  --lb-background: #121212;
+  --lb-background-hover: #1f2937;
+  --lb-foreground: #f9fafb;
+  --lb-foreground-muted: #9ca3af;
+  --lb-border: rgba(255, 255, 255, 0.1);
+  --lb-border-hover: rgba(255, 255, 255, 0.2);
+  --lb-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+}

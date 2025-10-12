@@ -5,6 +5,7 @@ import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { Toaster } from '@/components/ui/sonner';
 import { ThemeProvider } from '@/components/theme-provider';
 import '@liveblocks/react-ui/styles.css';
+import '@liveblocks/react-ui/styles/dark/attributes.css';
 import '@liveblocks/react-tiptap/styles.css';
 import './globals.css';
 import './globals.css';
