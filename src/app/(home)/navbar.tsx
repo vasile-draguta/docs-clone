@@ -23,7 +23,7 @@ export function Navbar() {
   }, [organization, getToken]);
 
   return (
-    <nav className='flex items-center justify-between h-full w-full dark:bg-black'>
+    <nav className='flex items-center justify-between h-full w-full dark:bg-zinc-950'>
       <div className='flex gap-3 items-center shrink-0 pr-6'>
         <Link href='/'>
           <Image

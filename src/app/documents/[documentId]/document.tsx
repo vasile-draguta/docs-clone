@@ -16,12 +16,12 @@ export function Document({ preloadedDocument }: DocumentProps) {
 
   return (
     <Room>
-      <div className='min-h-screen bg-[#fafbfd] dark:bg-black'>
-        <div className='flex flex-col px-4 gap-y-2 fixed top-0 left-0 right-0 z-10 bg-[#FAFBFD] print:hidden dark:bg-black'>
+      <div className='min-h-screen bg-[#fafbfd] dark:bg-zinc-950'>
+        <div className='flex flex-col px-4 gap-y-2 fixed top-0 left-0 right-0 z-20 bg-[#FAFBFD] print:hidden dark:bg-zinc-950'>
           <Navbar data={document} />
           <Toolbar />
         </div>
-        <div className='pt-[114px] print:pt-0 dark:bg-black'>
+        <div className='pt-[114px] print:pt-0 dark:bg-zinc-950 h-screen overflow-hidden'>
           <Editor initialConent={document.initialContent} />
         </div>
       </div>

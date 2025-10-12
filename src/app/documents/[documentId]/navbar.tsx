@@ -119,7 +119,7 @@ export function Navbar({ data }: NavbarProps) {
   };
 
   return (
-    <nav className='flex items-center justify-between dark:bg-black'>
+    <nav className='flex items-center justify-between dark:bg-zinc-950'>
       <div className='flex gap-2 items-center'>
         <Link href='/'>
           <Image
